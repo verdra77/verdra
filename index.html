@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VERDRA</title>
+  <link rel="stylesheet" href="mainstyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<nav>
+    <div class="container">
+        <div class="nav-con">
+            <div class="nav-left">
+    <img src="https://img5.pic.in.th/file/secure-sv1/rrtd.png" alt="Logo" class="nav-logo-img">
+                <div class="nav-title-text">LISTNAME</div>
+            </div>         
+            <div class="nav-right">
+                <a href="https://www.facebook.com/profile.php?id=100076435819759" target="_blank">
+        <img src="https://img5.pic.in.th/file/secure-sv1/facebooke1e1a587189d2d20.png" alt="Facebook" class="nav-logo-img">
+    </a>
+    <a href="https://www.youtube.com/@verdrabxy4664" target="_blank">
+        <img src="https://img2.pic.in.th/youtube1c32083069547b69.png" alt="YouTube" class="nav-logo-img">
+    </a>
+</div>
+    </div>
+    </div>
+</nav>
+<section class="maincontent">
+    <div class="maincontent-img background-container"> <div class="particles"></div>
+    <div class="particle-container">
+            <div class="particle-layer layer-1"></div>
+            <div class="particle-layer layer-2"></div>
+            <div class="particle-layer layer-3"></div>
+        </div>     
+        <div class="overlay-texture"></div>
+        <div class="overlay"></div>
+        <img src="https://img5.pic.in.th/file/secure-sv1/tam.png" alt="verdra" class="main-bg">
+        <div class="center-content">
+    <div class="title-fade-wrapper">
+        <h1 class="main-title">VERDRA</h1>
+    </div>
+    <div class="center-btn">
+        <a href="Member.html" class="btn btn-cloudcus">CLOUDCUS</a>
+        <a href="memberr.html" class="btn btn-cloudcus">VERDRA</a>
+        <a href="memberrr.html" class="btn btn-cloudcus">SOYVEGAN</a>
+    </div>
+</div>
+    </div>
+</section> 
+<footer class="site-footer">
+        <p>© 2026 VERDRA X SOYVEGAN | DESIGNED BY DROWNING </p>
+    </footer>
+    
+<div class="music-control" onclick="toggleMusic()">
+    <i id="musicIcon" class="fa-solid fa-volume-xmark"></i>
+</div>
+
+<audio id="myAudio" loop>
+    <source src="verdra-justward.mp3" type="audio/mpeg">
+</audio>
+<script>
+    // ใช้ ID แทน Class เพื่อความแม่นยำ
+    const audio = document.getElementById("myAudio");
+    const icon = document.getElementById("musicIcon");
+    const musicBtn = document.getElementById("musicBtnBox"); // เพิ่ม ID ให้กล่องปุ่ม
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play().catch(function(error) {
+                console.log("Browser blocked autoplay: ", error);
+            });
+            icon.className = "fa-solid fa-volume-high";
+            if(musicBtn) musicBtn.classList.add("playing");
+        } else {
+            audio.pause();
+            icon.className = "fa-solid fa-volume-xmark";
+            if(musicBtn) musicBtn.classList.remove("playing");
+        }
+    }
+</script>
+
+</body>
+</html>

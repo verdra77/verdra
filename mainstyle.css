@@ -1,0 +1,474 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+
+/* --- ปรับปรุงแถบ NAV ใหม่ --- */
+nav {
+    position: sticky;
+    top: 0; /* ชิดขอบบน */
+    z-index: 1000;
+    width: 100%;
+}
+
+.nav-con {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    /* สร้างเส้นขอบด้านล่างให้เรืองแสง */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* เพิ่มลูกเล่นเงาเรืองแสงด้านล่าง */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* เพิ่มขีดตกแต่งที่มุม (ลูกเล่นเพิ่มความเฟี้ยว) */
+.nav-con::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    /* สร้างสีแบบไล่ระดับที่มีจุดสว่างแค่ตรงกลาง */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 20%, 
+        #ffffff 50%, 
+        rgba(255, 255, 255, 0.1) 80%, 
+        transparent 100%);
+    background-size: 200% 100%; /* ยืดพื้นหลังให้ใหญ่เพื่อเอาไว้ขยับ */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    
+    /* สั่งให้ขยับทั้งอัน */
+    animation: moveLight 10s linear infinite;
+}
+
+@keyframes moveLight {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ฝั่งซ้าย */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.badge-gold {
+    background: linear-gradient(to bottom, #f1c40f, #f39c12);
+    color: #000;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.nav-title-text {
+    color: white;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* ฝั่งขวา */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge-yellow {
+    background-color: #f1c40f;
+    color: #000;
+    font-weight: bold;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.admin-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 5px 15px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.admin-link:hover {
+    background-color: white;
+    color: black;
+}
+.logo a{
+    font-size: 3rem;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.maincontent {
+    width: 100%;
+    background-color: black;
+    /* เอา height: calc(...) ออก เพื่อให้ความสูงยืดตามรูปภาพจริง */
+}
+
+.maincontent-img {
+    width: 100%;
+}
+
+.maincontent-img img {
+    width: 100%;
+    height: auto; /* สำคัญมาก: เพื่อให้รูปคงสัดส่วนเดิม (Ratio) ไม่โดนตัด */
+    display: block;
+}
+
+.maincontent-img {
+    position: relative; /* ให้ลูกๆ อ้างอิงตำแหน่งจากตัวมัน */
+    width: 100%;
+    height: 100vh;      /* ให้ความสูงเต็มจอ */
+    overflow: hidden;
+    background-color: #000000;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* ปรับค่า 0.6 (60%) ตามใจชอบ ยิ่งมากยิ่งมืด */
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 5; /* ให้อยู่เหนือรูปภาพแต่อยู่ใต้ตัวหนังสือ */
+}
+
+.main-bg {
+    z-index: 1;
+    /* แถม: ทำให้ภาพเบลอนิดๆ จะช่วยให้ตัวหนังสือเด่นขึ้นมาก */
+    filter: brightness(0.999) blur(1px); 
+}
+
+/* จัดก้อนเนื้อหาให้อยู่กึ่งกลางหน้าจอ */
+.center-content {
+    position: absolute;
+    top: 50%;           /* อยู่กึ่งกลางแนวตั้ง */
+    left: 50%;          /* อยู่กึ่งกลางแนวนอน */
+    transform: translate(-50%, -50%); /* เลื่อนตัวเองกลับมาให้กลางเป๊ะ */
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+}
+
+/* 1. ส่วนที่คุมการค่อยๆ ขึ้น (Fade In Up) */
+.title-fade-wrapper {
+    opacity: 0;
+    /* ให้เริ่มเล่นหลัง Nav นิดหน่อย และค้างสถานะไว้ */
+    animation: fadeInUp 1.5s ease-out 0.8s forwards; 
+}
+
+/* 2. ส่วนที่คุมการลอย (Floating) ปรับปรุงให้นุ่มนวลขึ้น */
+.main-title {
+    font-family: 'Cinzel', serif;
+    font-size: 6.5rem;
+    color: white;
+    letter-spacing: 25px;
+    margin-bottom: 40px;
+    font-weight: 900;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+    
+    /* เงาแบบนุ่มนวลหลายชั้น */
+text-shadow: 
+        0 0 7px #ffffff,
+        0 0 10px #ffffff,
+        0 0 21px #000000,
+        0 0 32px #ececec, /* สีเรืองแสงชั้นใน */
+        0 0 60px #ffffff, /* สีเรืองแสงชั้นนอก */
+        0 0 62px #000000;
+    /* ใส่เฉพาะท่าลอยอย่างเดียว และใช้จังหวะแบบนุ่มนวล (easeInOutSine) */
+    animation: floating 4s ease-in-out infinite; 
+    will-change: transform; /* ช่วยให้เบราว์เซอร์ประมวลผลได้ลื่นขึ้น */
+    animation: glowPulse 2s infinite ease-in-out; /* เพิ่มแอนิเมชันให้เรืองแสงวูบวาบ */
+}
+
+/* 3. ปรับปรุง Keyframe ให้สมูทกว่าเดิม */
+@keyframes floating {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px); /* ลอยขึ้นช้าๆ */
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 60% {
+        text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 42px #4a90e2, 0 0 82px #4a90e2;
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 50px #4a90e2, 0 0 100px #4a90e2;
+        transform: scale(1.02); /* ขยายเล็กน้อยตอนเรืองแสงสุดๆ */
+    }
+}
+/* ปรับแต่งปุ่มให้เรียงกัน */
+.center-btn {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    /* ปรับขนาดปุ่มที่นี่ */
+    padding: 20px 60px;          /* 20px คือความสูง, 60px คือความกว้าง (ปรับให้ใหญ่ขึ้น) */
+    font-size: 1.8rem;           /* ขยายขนาดตัวอักษรในปุ่ม */
+    
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 3px solid white;     /* เพิ่มความหนาของเส้นขอบเป็น 3px ให้ดูแข็งแรงขึ้น */
+    border-radius: 50px; 
+    text-decoration: none;
+    font-weight: bold;           /* ทำให้ตัวหนา */
+    text-transform: uppercase;   /* ปรับเป็นตัวพิมพ์ใหญ่ให้ดูเข้ากับชื่อหลัก */
+    transition: 0.3s;
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+
+/* เอฟเฟกต์เวลาเอาเมาส์วางให้ดูอลังการขึ้น */
+.btn:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.1);       /* ขยายปุ่มให้ใหญ่ขึ้น 10% เมื่อเอาเมาส์วาง */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); /* เพิ่มแสงฟุ้งรอบปุ่ม */
+}
+
+/* เอฟเฟกต์ฝุ่นร่วงแบบ Random โดยใช้เลเยอร์เดียว */
+.particles {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    
+    /* สร้างฝุ่น 3 ชั้นที่มีความหนาแน่นต่างกัน */
+    background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.4) 1px, transparent 3px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.3) 1.2px, transparent 6px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.15) 2px, transparent 10px);
+    
+    /* ใช้ขนาดที่ "ไม่ลงตัว" กันอย่างแรงเพื่อไม่ให้เกิดเส้นตรง */
+    background-size: 271px 337px, 461px 593px, 719px 827px; 
+    
+    /* ตั้งจุดเริ่มให้เยื้องแบบ "ทะแยง" (Diagonal Offset) เพื่อทำลายความเป็นแถว */
+    background-position: 0px 0px, 157px 291px, -342px 513px;
+    
+    z-index: 6;
+    opacity: 0.6;
+    pointer-events: none;
+    
+    /* ปรับความเร็วให้ช้าลงเพื่อลดการสังเกตเห็นแพทเทิร์น */
+    animation: snowDownChaos 60s linear infinite;
+    will-change: background-position;
+}
+
+@keyframes snowDownChaos {
+    0% {
+        background-position: 
+            0px 0px, 
+            157px 291px, 
+            -342px 513px;
+    }
+    100% {
+        /* หัวใจสำคัญ: เลื่อนระยะแกน X และ Y ด้วยเลขที่ต่างกันมาก */
+        /* ชั้น 1: เฉียงซ้ายเยอะ */
+        /* ชั้น 2: เฉียงขวานิดๆ */
+        /* ชั้น 3: ลงเกือบตรงแต่ระยะร่วงยาวมาก */
+        background-position: 
+            -813px 2022px,   /* เลื่อน X ไป 3 รอบของตัวเอง เพื่อให้ดูวิ่งเร็วเฉียง */
+            922px 1779px,    /* เลื่อน X ไป 2 รอบ */
+            -342px 3308px;   /* ร่วงลงมา 4 รอบของตัวเอง */
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    /* ซ่อนแถบเลื่อนทั้งแนวตั้งและแนวนอน */
+    overflow: hidden; 
+    background-color: #000; /* ให้พื้นหลังเป็นสีดำสนิทเสมอ */
+}
+
+/* --- ส่วนที่ 1: ขยายขนาดโลโก้ --- */
+.nav-logo-img {
+    height: 60px;      /* ปรับจาก 35px เป็น 60px หรือใหญ่ตามต้องการ */
+    width: auto;       /* รักษาอัตราส่วนรูปภาพไม่ให้เบี้ยว */
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease; /* เพิ่มลูกเล่นเวลาเมาส์ชี้ */
+}
+
+.nav-logo-img:hover {
+    transform: scale(1.1); /* ขยายใหญ่ขึ้นอีกนิดเวลาเอาเมาส์วาง */
+}
+
+/* --- ส่วนที่ 2: แก้ปัญหาขอบขาวและขอบข้างล่าง (จากรูปภาพที่คุณส่งมา) --- */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    /* บังคับซ่อนแถบเลื่อนที่เป็นต้นเหตุของขอบเทาข้างล่างและขวา */
+    overflow: hidden; 
+}
+
+/* ปรับระยะห่างใน Nav ให้สมดุลกับโลโก้ที่ใหญ่ขึ้น */
+.nav-con {
+    padding: 15px 30px; /* เพิ่มพื้นที่หายใจให้แถบเมนู */
+}
+
+/* --- ส่วนที่ 3: ระบบ Animation (ค่อยๆ ปรากฏขึ้น) --- */
+
+/* 1. คีย์เฟรมสำหรับเอฟเฟกต์เลื่อนขึ้นและจางเข้า */
+/* ค่อยๆ เลื่อนขึ้นและจางเข้า */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ลอยขึ้นลงนุ่มนวล */
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ฝุ่นร่วง (ใช้ตามโค้ดเดิมของคุณ) */
+@keyframes snowDownChaos {
+    0% { background-position: 0px 0px, 157px 291px, -342px 513px; }
+    100% { background-position: -813px 2022px, 922px 1779px, -342px 3308px; }
+}
+
+/* 2. บังคับให้ส่วนประกอบที่ต้องการค่อยๆ ขึ้น เริ่มต้นด้วยการซ่อน (Opacity 0) */
+nav, 
+.main-title, 
+.center-btn,
+.particles {
+    opacity: 0;
+    /* 1.2s คือความเร็วในการเคลื่อนที่, forwards คือให้ค้างไว้เมื่อแสดงเสร็จ */
+    animation: 
+        fadeInUp 2s ease-out 0.5s forwards, 
+        snowDownChaos 60s linear infinite;
+}
+
+/* 3. กำหนดจังหวะการขึ้น (ใครจะขึ้นก่อน-หลัง) */
+nav {
+    animation-delay: 0.3s; /* เมนูบนขึ้นมาก่อนเพื่อน */
+}
+
+.particles {
+    animation-delay: 0.6s; /* ฝุ่นค่อยๆ ปรากฏตามมา */
+}
+
+.main-title {
+    animation: 
+        fadeInUp 1.2s ease-out 0.9s forwards, 
+        floating 3s ease-in-out 2.1s infinite;
+}
+
+.center-btn {
+    animation-delay: 1.4s; /* ปุ่มกดขึ้นมาเป็นลำดับสุดท้าย */
+}
+
+.music-control {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1); /* พื้นหลังกระจกโปร่งแสง */
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกเบลอ */
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* เมื่อเพลงเล่น ให้ขอบเรืองแสงเป็นสีทอง */
+.music-control.playing {
+    border-color: #f1c40f;
+    box-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
+    color: #f1c40f;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* เอฟเฟกต์ตัวลำโพงขยับเบาๆ เวลาเอาเมาส์วาง */
+.music-control:hover i {
+    transform: rotate(-10deg);
+}
+
+.site-footer {
+    position: fixed;   /* บังคับให้ลอยค้างหน้าจอ */
+    bottom: 20px;      /* ห่างจากขอบล่าง 20px */
+    left: 0;
+    width: 100%;       /* ยืดเต็มความกว้าง */
+    z-index: 9999;     /* ดันขึ้นมาให้อยู่เหนือรูปภาพและ Overlay ทุกอย่าง */
+    text-align: center;
+    pointer-events: none; /* เพื่อไม่ให้ขวางการคลิกปุ่มอื่นๆ */
+}
+
+.site-footer p {
+    color: rgba(255, 255, 255, 0.4) !important; /* บังคับให้เป็นสีขาวจางๆ */
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+    font-family: sans-serif;
+}
