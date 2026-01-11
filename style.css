@@ -17,6 +17,23 @@ body {
     margin: 0 auto;
 }
 
+/* สำหรับหน้าจอมือถือ */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%; /* ให้ความกว้างเต็มจอ */
+    padding: 10px;
+  }
+  
+  .menu {
+    display: block; /* เปลี่ยนเมนูจากแนวนอนเป็นแนวตั้ง */
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Header */
 header {
     display: flex;
@@ -145,6 +162,7 @@ header {
 .leader { color: #bc4eff; }
 .support { color: #ffcc00; }
 .member { color: #ffffff77; }
+.rp { color: #00ff62; }
 
 /* ปุ่ม Facebook */
 .btn-fb {
