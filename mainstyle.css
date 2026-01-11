@@ -9,6 +9,22 @@
     margin: 0 auto;
 }
 
+/* สำหรับหน้าจอมือถือ */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%; /* ให้ความกว้างเต็มจอ */
+    padding: 10px;
+  }
+  
+  .menu {
+    display: block; /* เปลี่ยนเมนูจากแนวนอนเป็นแนวตั้ง */
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 /* --- ปรับปรุงแถบ NAV ใหม่ --- */
 nav {
@@ -471,4 +487,29 @@ nav {
     text-transform: uppercase;
     margin: 0;
     font-family: sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+    /* ปรับหัวข้อใหญ่ให้เล็กลงไม่ล้นจอ */
+    .main-title {
+        font-size: 2.8rem !important; 
+        letter-spacing: 8px !important;
+    }
+
+    /* ปรับปุ่มให้ขนาดพอดีนิ้วและไม่ล้น */
+    .btn {
+        padding: 15px 40px !important;
+        font-size: 1.1rem !important;
+    }
+
+    /* จัดกลุ่มปุ่มให้ไม่อัดกัน */
+    .center-btn {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* ลดขนาดโลโก้ในแถบเมนู */
+    .nav-logo-img {
+        height: 45px !important;
+    }
 }
