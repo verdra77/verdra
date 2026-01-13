@@ -243,7 +243,6 @@ text-shadow:
         transform: translateY(0);
     }
 }
-
 @keyframes glowPulse {
     0%, 60% {
         text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 42px #4a90e2, 0 0 82px #4a90e2;
@@ -511,5 +510,60 @@ nav {
     /* ลดขนาดโลโก้ในแถบเมนู */
     .nav-logo-img {
         height: 45px !important;
+    }
+}
+/* จัดวางตำแหน่งให้อยู่ใต้ปุ่ม */
+.member-count-wrapper {
+    margin-top: 30px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* เพิ่มส่วนนี้เพื่อให้เริ่มต้นแบบโปร่งใสและเลื่อนลงไปก่อน */
+    opacity: 0;
+    transform: translateY(20px); 
+    /* เรียกใช้แอนิเมชันชื่อ fadeUp */
+    animation: fadeUp 2.5s ease-out forwards;
+    animation-delay: 1.9s; /* หน่วงเวลาเล็กน้อยเพื่อให้ปุ่มขึ้นมาก่อน (ปรับได้) */
+}
+
+.member-count {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    /* เพิ่มเงาสีแดงฟ้าตามรูปต้นฉบับ */
+    text-shadow: 
+        0 0 7px #ffffff,
+        0 0 10px #ffffff,
+        0 0 21px #000000,
+        0 0 32px #ececec, /* สีเรืองแสงชั้นใน */
+        0 0 60px #ffffff, /* สีเรืองแสงชั้นนอก */
+        0 0 62px #000000;
+}
+
+.member-count i {
+    margin-right: 12px;
+    font-size: 20px;
+    text-shadow: 
+        0 0 7px #ffffff,
+        0 0 10px #ffffff,
+        0 0 21px #000000,
+        0 0 32px #ececec, /* สีเรืองแสงชั้นใน */
+        0 0 60px #ffffff, /* สีเรืองแสงชั้นนอก */
+        0 0 62px #000000;
+}
+
+/* สร้าง Animation สำหรับการเฟดขึ้น */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* เริ่มจากข้างล่าง */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);    /* เลื่อนขึ้นมาจุดปกติและสว่างชัดเจน */
     }
 }
