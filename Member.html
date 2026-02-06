@@ -503,6 +503,34 @@ document.addEventListener("DOMContentLoaded", function() {
         title.classList.add('fade-in');
     });
 });
-</script>
+        function createSnowflake() {
+            const flake = document.createElement('div');
+            flake.classList.add('snow-flake');
+            flake.style.width = Math.random() * 3 + 2 + 'px';
+            flake.style.height = flake.style.width;
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.position = 'fixed';
+            flake.style.top = '-10px';
+            flake.style.backgroundColor = 'white';
+            flake.style.borderRadius = '50%';
+            flake.style.opacity = Math.random();
+            flake.style.zIndex = '9999';
+            flake.style.pointerEvents = 'none';
+            
+            const duration = Math.random() * 5 + 3;
+            flake.animate([
+                { transform: 'translateY(0)' },
+                { transform: 'translateY(100vh)' }
+            ], {
+                duration: duration * 1000,
+                iterations: 1
+            });
+
+            document.body.appendChild(flake);
+            setTimeout(() => { flake.remove(); }, duration * 1000);
+        }
+        setInterval(createSnowflake, 100);
+    </script>
 </body>
 </html>
+
