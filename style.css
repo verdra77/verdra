@@ -84,14 +84,15 @@ header {
     font-weight: bold;
 }
 
-/* 1. เตรียมสถานะเริ่มต้น (ซ่อนไว้ก่อน) */
+/* 1. เตรียมสถานะเริ่มต้น (ซ่อนและเลื่อนลงเล็กน้อย) */
 .member-card {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(20px);
+    /* ปรับเวลา 0.8s คือความช้าในการค่อยๆ แสดงผล */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* 2. คลาสที่จะถูกเติมด้วย JavaScript เพื่อให้แสดงผล */
+/* 2. เมื่อมีคลาส show จะค่อยๆ ปรากฏ */
 .member-card.show {
     opacity: 1;
     transform: translateY(0);
@@ -113,16 +114,21 @@ header {
     }
 }
 
-/* Member Grid */
+/* Member Grid - ปรับระยะห่างให้ดูโปร่งขึ้น */
 .member-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 25px;
+    padding: 10px 0;
 }
 
-/* Member Card */
+/* ตั้งค่าให้แสดงผลทันที ไม่ต้องมีสถานะซ่อน */
 .member-card {
-    background: rgba(255, 255, 255, 0.03); /* เอฟเฟกต์โปร่งแสง */
+    opacity: 1;             /* แสดงผล 100% ทันที */
+    transform: translateY(0); /* อยู่ในตำแหน่งปกติ ไม่ต้องเลื่อนขึ้น */
+    
+    /* คงเหลือแค่ Hover Effect เดิมไว้ (ถ้าต้องการ) */
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 20px;
@@ -132,22 +138,56 @@ header {
     transition: transform 0.3s ease, background 0.3s ease;
 }
 
+/* ลบคลาส .member-card.show ออกไปได้เลย หรือปล่อยทิ้งไว้ก็ได้ไม่มีผลแล้ว */
+
+/* เอฟเฟกต์เมื่อวางเมาส์ */
 .member-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgb(255, 255, 255);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 
+                0 0 15px rgba(0, 242, 255, 0.1);
 }
 
+/* ปรับปรุงรูปโปรไฟล์ */
 .member-logo img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    border-radius: 18px; /* ปรับให้โค้งมนแบบ Squircle ดูทันสมัยกว่าวงกลม */
     object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
     background: #1a1d23;
 }
 
+/* ปรับตัวหนังสือชื่อ */
 .member-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
+/* ปรับปรุงปุ่ม Facebook ให้ดูแพงขึ้น */
+.btn-fb {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btn-fb:hover {
+    background: #1877f2;
+    color: white;
+    border-color: #1877f2;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
 }
 
 /* สีแบ่งระดับ (Role Colors) */
@@ -184,4 +224,100 @@ header {
 
 .btn-fb i {
     margin-right: 5px;
+}
+/* ส่วนของกลุ่มหมวดหมู่ */
+.category-section {
+    margin-bottom: 60px;
+    padding: 0 10px;
+}
+
+/* หัวข้อหมวดหมู่ที่มีลูกเล่นเรืองแสง */
+.category-title {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* เมื่อหัวข้อแสดงผล */
+.category-title.fade-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* เส้นเรืองแสงแนวตั้ง (Neon Bar) แบบโค้งมนตามรูป */
+.category-title::before {
+    content: "";
+    width: 6px;
+    height: 32px;
+    /* ไล่สีจากฟ้าสว่างไปฟ้าเข้ม */
+    background: linear-gradient(180deg, #00f2ff 0%, #0047ff 100%);
+    border-radius: 50px; /* ทำให้ปลายโค้งมน */
+    display: block;
+    box-shadow: 0 0 15px rgba(0, 71, 255, 0.8), 
+                0 0 5px rgba(0, 242, 255, 0.5);
+}
+
+/* ปรับแต่งตัวหนังสือ FOUNDER / LEADERS */
+/* ส่วนของหัวข้อที่มีการเคลื่อนไหว */
+.category-title span {
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    
+    /* สร้าง Gradient แบบยาวเพื่อให้ขยับได้ */
+    background: linear-gradient(
+        120deg, 
+        #ffffff 0%, 
+        #ffffff 40%, 
+        #00f2ff 50%, 
+        #ffffff 60%, 
+        #ffffff 100%
+    );
+    background-size: 200% auto; /* ขยายขนาดเพื่อให้พื้นหลังเลื่อนได้ */
+    
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* สั่งให้สีขยับตลอดเวลา */
+    animation: shineText 3s linear infinite;
+}
+
+/* เส้นเรืองแสงข้างหน้าที่ขยับสีได้ */
+.category-title::before {
+    content: "";
+    width: 6px;
+    height: 32px;
+    background: linear-gradient(180deg, #00f2ff, #0047ff, #00f2ff);
+    background-size: 100% 200%;
+    border-radius: 50px;
+    display: block;
+    box-shadow: 0 0 15px rgba(0, 71, 255, 0.8);
+    
+    /* สั่งให้สีในเส้นไหลลงด้านล่าง */
+    animation: flowBar 2s linear infinite;
+}
+
+/* --- Keyframes สำหรับ Animation --- */
+/* เอฟเฟกต์แสงวิ่งผ่านตัวหนังสือ */
+@keyframes shineText {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* เอฟเฟกต์สีไหลในเส้นเรืองแสง */
+@keyframes flowBar {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 0% 200%;
+    }
 }
